@@ -1,6 +1,8 @@
 package com.example.c_mail.controller;
 
 import com.example.c_mail.model.MailModel;
+import com.example.c_mail.service.MailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/mail")
 public class MailController {
 
+    private final MailService mailService;
+
+    public MailController(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @PostMapping("/send")
     public ResponseEntity<?> sendMail(@RequestParam("fullName") String fullName,
@@ -15,6 +22,6 @@ public class MailController {
                                       @RequestParam("message") String message) {
 
         MailModel mailModel = MailModel.builder().fullName(fullName).mail(mail).message(message).build();
-        return ResponseEntity.ok(mailModel);
+        return ResponseEntity.ok(mailService.sendMail(mailModel));
     }
 }

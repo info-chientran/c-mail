@@ -6,4 +6,6 @@ JDK: Amazon corretto 17.0.14
 
 ## Features
 
-- [ ] Send mail
+- [x] Send mail
+- [ ] Config log
+- [ ] Config docker
